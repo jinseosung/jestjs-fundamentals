@@ -17,10 +17,15 @@ const GetByRole = () => {
             alt="Danonino"
           />
         </article>
+
+        <h2>Inscription</h2>
         <form>
           <div>
             <label htmlFor="name">Nom</label>
             <input type="text" id="name" />
+
+            <label htmlFor="lastName">Prénom</label>
+            <input type="text" id="lastName" />
           </div>
 
           <div>
@@ -35,6 +40,12 @@ const GetByRole = () => {
             <label>
               <input type="checkbox" id="condition-check" />
               J'accepte les termes et conditions
+            </label>
+          </div>
+          <div>
+            <label>
+              <input type="checkbox" id="newsletter-check" />
+              Je m'abbone à la nesletter
             </label>
           </div>
           <button>Submit</button>

@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, act } from "@testing-library/react";
 import IncrementCount from "./IncrementCount";
 import userEvent from "@testing-library/user-event";
 
@@ -124,5 +124,20 @@ describe("Learn User Interactions", () => {
     const h1 = screen.getByRole("heading");
     expect(h1).toHaveTextContent("3");
     expect(button).toHaveStyle({ "background-color": "cyan" });
+  });
+
+  test("Popup appeard and disappeard", async () => {
+    render(<IncrementCount />);
+    const user = userEvent.setup();
+
+    const span = screen.queryByText(/les Termes et conditions/i);
+    expect(span).toBeInTheDocument();
+    await act(() => user.hover(span));
+
+    const popup = screen.queryByText(/labore ullam possimus/i);
+    expect(popup).toBeInTheDocument();
+
+    await act(() => user.unhover(span));
+    expect(popup).toBeNull();
   });
 });

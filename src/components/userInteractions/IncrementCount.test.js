@@ -138,6 +138,27 @@ describe("Learn User Interactions", () => {
     expect(popup).toBeInTheDocument();
 
     await act(() => user.unhover(span));
-    expect(popup).toBeNull();
+    expect(popup).not.toBeInTheDocument();
+  });
+
+  test("Focus on checkbox after tap, button", async () => {
+    render(<IncrementCount />);
+    const user = userEvent.setup();
+
+    const button = screen.getByRole("button", {
+      name: /Vous avez cliqué \d+ fois/,
+    });
+
+    const checkbox = screen.getByRole("checkbox", {
+      name: /j'accepte les termes et conditions/i,
+    });
+
+    await user.tab();
+    expect(checkbox).toHaveFocus();
+    await user.click(checkbox);
+    expect(button).not.toHaveFocus();
+    await user.tab();
+    expect(checkbox).not.toHaveFocus();
+    expect(button).toHaveFocus();
   });
 });
